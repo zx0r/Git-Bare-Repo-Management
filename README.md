@@ -1,5 +1,5 @@
 
-### 🛠️ Managing dotfiles and with a Bare Git Repository
+### 🛠️ Managing dotfiles with a Bare Git Repository
 
 Managing dotfiles using a bare Git repository is a clean, efficient, and version-controlled approach to maintaining system configurations across multiple environments. 
 This guide follows **DevOps, DevSecOps, and automation best practices** to ensure seamless setup, maintainability, and security.
