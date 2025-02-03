@@ -188,19 +188,15 @@ gh ssh-key add ~/.ssh/id_rsa.pub
 gh auth status
 
 # Create a new private repository:
-
-cd $HOME
-gh repo create "<github-repo-name>" --description "your-description" --public --clone
+gh repo create "<github-repo-name>" --description "your-description" --public
 
 # Set alias (this easy workflow)
 alias bare="git --git-dir=$HOME/<github-repo-name> --work-tree=<github-repo-name>"
 
-# Add/Commit/Push ...
-
 # 🧩 Example:
 
-# Step 1. Create and download repo (use `--clone`)
-user $ gh repo create "Git-Bare-Repo-Management" --description "💡Understanding GIT_DIR and GIT_WORK_TREE as Abstractions in Bare Repository Management" --public --clone
+# Step 1. Create and download repo (with `--clone`)
+user $ cd $HOME && gh repo create "Git-Bare-Repo-Management" --description "💡Understanding GIT_DIR and GIT_WORK_TREE as Abstractions in Bare Repository Management" --public --clone
 
 # Step 2. Initializing bare Git repository
 user $ git init --bare $HOME/Git-Bare-Repo-Management
@@ -361,7 +357,8 @@ Using a **bare Git repository** for dotfiles keeps your configuration organized,
 🔗 **Reference:** 
 - [GitHub Dotfiles Guide](https://www.atlassian.com/git/tutorials/dotfiles)
 - [gh-repo-create](https://cli.github.com/manual/gh_repo_create)
-- [Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories) 
+- [Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
+- [HackerNews](https://news.ycombinator.com/item?id=32632533) 
 
 ---
 🚀 Happy hacking!
