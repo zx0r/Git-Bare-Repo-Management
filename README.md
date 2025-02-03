@@ -48,14 +48,80 @@ git --git-dir=$HOME/.dotfiles --work-tree=$HOME add <file>
 git --git-dir=$HOME/.dotfiles --work-tree=$HOME status
 git --git-dir=$HOME/.dotfiles --work-tree=$HOME commit -m "Updated <file>"
 git --git-dir=$HOME/.dotfiles --work-tree=$HOME push -u origin main
-# etc ...
 
 # Without affecting standard repositories.
 # This abstraction effectively decouples repository storage (GIT_DIR) from version-controlled files (GIT_WORK_TREE),
 # making it # a powerful method for managing dotfiles or any workspace where versioning should not interfere with project 
 # directories. 🚀
-```
 
+# 🧩 Example:
+
+# Step 1. Create and download repo (with `--clone`)
+user $ cd $HOME && gh repo create "Git-Bare-Repo-Management" --description "💡Understanding GIT_DIR and GIT_WORK_TREE as Abstractions in Bare Repository Management" --public --clone
+
+# Step 2. Initializing bare Git repository
+user $ git init --bare $HOME/Git-Bare-Repo-Management
+
+# Step 3. Configure Git to hide untracked files (so home directory looks clean)
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management config --local status.showUntrackedFiles no
+
+# Step 4. Set the default branch to 'main'
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management branch -M main
+
+# Step 5. Add the remote repository
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management remote add origin git@github.com:zx0r/Git-Bare-Repo-Management.git
+
+# Step 6. Check remote repository
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management remote -v
+origin  git@github.com:zx0r/Git-Bare-Repo-Management.git (fetch)
+origin  git@github.com:zx0r/Git-Bare-Repo-Management.git (push)
+
+# Step 7. Add files for commit
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management add README.md
+
+# Step 8. Check the status of the repository
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   README.md
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+Untracked files not listed (use -u option to show untracked files)
+
+# Step 9. Commit files with a message
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management commit -m "Add Readme.md"
+[main (root-commit) 2ec655b] Add Readme.md
+ 1 file changed, 315 insertions(+)
+ create mode 100644 README.md
+
+# Step 10. Push changes
+user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 24 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 3.49 KiB | 3.49 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To github.com:zx0r/Git-Bare-Repo-Management.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+# (optional) Verified remote repository content
+gh api repos/zx0r/Git-Bare-Repo-Management/contents/README.md --jq '.download_url' | xargs curl -fsSL
+
+# (Optional) Download content 
+gh api repos/zx0r/Git-Bare-Repo-Management/contents/README.md --jq '.download_url' | xargs curl -o README.md
+
+✅ Congratulations 🎉
+```
 ---
 
 🚀 Quick Start
@@ -192,76 +258,7 @@ gh repo create "<github-repo-name>" --description "your-description" --public
 
 # Set alias (this easy workflow)
 alias bare="git --git-dir=$HOME/<github-repo-name> --work-tree=<github-repo-name>"
-
-# 🧩 Example:
-
-# Step 1. Create and download repo (with `--clone`)
-user $ cd $HOME && gh repo create "Git-Bare-Repo-Management" --description "💡Understanding GIT_DIR and GIT_WORK_TREE as Abstractions in Bare Repository Management" --public --clone
-
-# Step 2. Initializing bare Git repository
-user $ git init --bare $HOME/Git-Bare-Repo-Management
-
-# Step 3. Configure Git to hide untracked files (so home directory looks clean)
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management config --local status.showUntrackedFiles no
-
-# Step 4. Set the default branch to 'main'
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management branch -M main
-
-# Step 5. Add the remote repository
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management remote add origin git@github.com:zx0r/Git-Bare-Repo-Management.git
-
-# Step 6. Check remote repository
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management remote -v
-origin  git@github.com:zx0r/Git-Bare-Repo-Management.git (fetch)
-origin  git@github.com:zx0r/Git-Bare-Repo-Management.git (push)
-
-# Step 7. Add files for commit
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management add README.md
-
-# Step 8. Check the status of the repository
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management status
-On branch main
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-        new file:   README.md
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        modified:   README.md
-
-Untracked files not listed (use -u option to show untracked files)
-
-# Step 9. Commit files with a message
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management commit -m "Add Readme.md"
-[main (root-commit) 2ec655b] Add Readme.md
- 1 file changed, 315 insertions(+)
- create mode 100644 README.md
-
-# Step 10. Push changes
-user $ git --git-dir=$HOME/Git-Bare-Repo-Management --work-tree=$HOME/Git-Bare-Repo-Management push -u origin main
-Enumerating objects: 3, done.
-Counting objects: 100% (3/3), done.
-Delta compression using up to 24 threads
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 3.49 KiB | 3.49 MiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-To github.com:zx0r/Git-Bare-Repo-Management.git
- * [new branch]      main -> main
-branch 'main' set up to track 'origin/main'.
-
-# (optional) Verified remote repository content
-gh api repos/zx0r/Git-Bare-Repo-Management/contents/README.md --jq '.download_url' | xargs curl -fsSL
-
-# (Optional) Download content 
-gh api repos/zx0r/Git-Bare-Repo-Management/contents/README.md --jq '.download_url' | xargs curl -o README.md
-
-✅ Congratulations 🎉
 ```
-
 🔄 Automating Setup (For New Machines)
 
 ```bash
