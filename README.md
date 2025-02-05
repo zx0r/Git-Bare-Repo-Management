@@ -258,6 +258,56 @@ gh repo create "<github-repo-name>" --description "your-description" --public
 
 # Set alias (this easy workflow)
 alias bare="git --git-dir=$HOME/<github-repo-name> --work-tree=<github-repo-name>"
+
+# install with Homebrew (macOS, Linux)
+# or see other installation options
+brew install hub
+
+# verified
+hub version
+git version 2.25.0
+hub version 2.14.2 # ← it works!
+
+# indicate that you prefer HTTPS to SSH git clone URLs
+git config --global hub.protocol https
+
+# clone your own project
+hub clone dotfiles
+→ git clone git://github.com/YOUR_USER/dotfiles.git
+
+# clone another project
+hub clone github/hub
+→ git clone git://github.com/github/hub.git
+
+# fast-forward all local branches to match the latest state on the remote
+cd myproject
+hub sync
+
+# list latest open issues in the current repository
+hub issue --limit 10
+
+# open the current project's issues page
+hub browse -- issues
+→ open https://github.com/github/hub/issues
+
+# open another project's wiki
+hub browse rbenv/ruby-build wiki
+→ open https://github.com/rbenv/ruby-build/wiki
+
+# share log output via Gist
+hub gist create --copy build.log
+→ (the URL of the new private gist copied to clipboard)
+
+# Starting a new project has never been easier:
+# create a repo to host a new project on GitHub
+git init
+git add .
+git commit -m "And so, it begins."
+hub create
+→ (creates a new GitHub repository with the name of the current directory)
+git push -u origin HEAD
+
+# More info: https://hub.github.com
 ```
 🔄 Automating Setup (For New Machines)
 
