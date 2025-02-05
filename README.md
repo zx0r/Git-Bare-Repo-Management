@@ -258,7 +258,8 @@ gh repo create "<github-repo-name>" --description "your-description" --public
 
 # Set alias (this easy workflow)
 alias bare="git --git-dir=$HOME/<github-repo-name> --work-tree=<github-repo-name>"
-
+```
+```bash
 # install with Homebrew (macOS, Linux)
 # or see other installation options
 brew install hub
