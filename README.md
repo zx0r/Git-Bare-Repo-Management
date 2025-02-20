@@ -403,10 +403,11 @@ Using a **bare Git repository** for dotfiles keeps your configuration organized,
 - Automate setup with scripts.
 
 🔗 **Reference:** 
+- [GIT --fast-version-control](https://git-scm.com/docs/git-config)
 - [GitHub Dotfiles Guide](https://www.atlassian.com/git/tutorials/dotfiles)
-- [gh-repo-create](https://cli.github.com/manual/gh_repo_create)
 - [Managing remote repositories](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories)
-- [HackerNews](https://news.ycombinator.com/item?id=32632533) 
+- [HackerNews](https://news.ycombinator.com/item?id=32632533)
+- [gh-repo-create](https://cli.github.com/manual/gh_repo_create)
 
 ---
 🚀 Happy hacking!
